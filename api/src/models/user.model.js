@@ -1,0 +1,60 @@
+
+import mongoose from 'mongoose';
+
+const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+
+    email: {
+        type: String,
+        required: [true, 'Email is required'],
+        unique: true,
+        lowercase: true,
+        trim: true,
+        match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    },
+
+    password: {
+        type: String,
+        required: [true, 'Password is required'],
+        minLength: [6, 'Password must be at least 6 characters']
+    },
+
+    role: {
+        type: String,
+        enum: ["admin", "store"],
+        required: true
+    },
+
+    storeId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Store",
+        default: null
+    },
+
+    active: {
+        type: Boolean,
+        default: true
+    }
+},
+{
+    timestamps: true,
+    versionKey: false,
+    toJSON: {
+        virtuals: true,
+        transform: function (doc, ret) {
+            delete ret._id;
+            delete ret.password;
+        },
+    }
+});
+
+userSchema.index({ 
+    email: 1 
+});
+
+const User = mongoose.model('User', userSchema);
+
+export default User;
