@@ -1,4 +1,5 @@
 
+import bcrypt from "bcrypt";
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
@@ -51,9 +52,15 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-userSchema.index({ 
-    email: 1 
+userSchema.pre("save", async function () {
+    if (this.isModified("password")) {
+        this.password = await bcrypt.hash(this.password, 10);
+    }
 });
+
+userSchema.methods.checkPassword = function (passwordToCheck) {
+    return bcrypt.compare(passwordToCheck, this.password);
+};
 
 const User = mongoose.model('User', userSchema);
 
