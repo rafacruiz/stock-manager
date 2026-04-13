@@ -17,39 +17,33 @@ const productSchema = new mongoose.Schema({
     },
 
     ean: String,
-
+    
     categoryId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Category",
         required: true
     },
-
     unitId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Unit",
         required: true
     },
-
     supplier: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Supplier"
     }],
-
     price: {
         type: Number,
         default: 0
     },
-
     stockMin: {
         type: Number,
         default: 0
     },
-
-    images: [{
+    imagen: {
         url: String,
         publicId: String
-    }],
-
+    },
     active: {
         type: Boolean,
         default: true
