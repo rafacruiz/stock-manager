@@ -11,8 +11,6 @@ const storeSchema = new mongoose.Schema({
 
     phone: String,
 
-    email: String,
-
     active: {
         type: Boolean,
         default: true

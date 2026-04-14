@@ -28,7 +28,7 @@ const productSchema = new mongoose.Schema({
         ref: "Unit",
         required: true
     },
-    supplier: [{
+    supplierId: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Supplier"
     }],
@@ -40,7 +40,7 @@ const productSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    imagen: {
+    image: {
         url: String,
         publicId: String
     },
@@ -60,7 +60,6 @@ const productSchema = new mongoose.Schema({
     }
 });
 
-productSchema.index({ sku: 1 });
 productSchema.index({ categoryId: 1 });
 
 const Product = mongoose.model('Product', productSchema);
