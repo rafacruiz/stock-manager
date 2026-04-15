@@ -35,27 +35,24 @@ const orderSchema = new mongoose.Schema({
         ref: "Store",
         required: true
     },
-
     warehouseId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Warehouse",
         required: true
     },
-
+    deliveryDate: {
+        type: Date,
+        required: true
+    },
     state: {
         type: String,
         enum: [
             "draft",
             "pending",
-            "confirmed",
-            "preparing",
-            "ready",
-            "shipped",
-            "cancelled"
+            "confirmed"
         ],
         default: "draft"
     },
-
     items: [orderItemSchema],
 
     note: String,
@@ -75,9 +72,9 @@ const orderSchema = new mongoose.Schema({
     }
 });
 
-orderSchema.index({ storeId: 1 });
+orderSchema.index({ storeId: 1, deliveryDate: 1 });
 orderSchema.index({ warehouseId: 1 });
-orderSchema.index({ state: 1 });
+orderSchema.index({ deliveryDate: 1, state: 1 });
 
 const Order = mongoose.model('Order', orderSchema);
 

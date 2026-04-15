@@ -10,7 +10,12 @@ const storeSchema = new mongoose.Schema({
     address: String,
 
     phone: String,
-
+    
+    warehouseId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Warehouse",
+        required: true
+    },
     active: {
         type: Boolean,
         default: true
