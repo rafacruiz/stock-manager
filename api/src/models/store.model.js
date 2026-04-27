@@ -16,6 +16,11 @@ const storeSchema = new mongoose.Schema({
         ref: "Warehouse",
         required: true
     },
+    sortPreparation: {
+        type: Number,
+        required: true,
+        default: 0
+    },
     active: {
         type: Boolean,
         default: true

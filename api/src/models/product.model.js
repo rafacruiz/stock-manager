@@ -1,6 +1,28 @@
 
 import mongoose from "mongoose";
 
+const supplierRefSchema = new mongoose.Schema({
+    supplierId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Supplier",
+        required: true
+    },
+    mainSupplier: {
+        type: Boolean,
+        default: false
+    }
+},
+{
+    timestamps: true,
+    versionKey: false,
+    toJSON: {
+        virtuals: true,
+        transform: function (doc, ret) {
+            delete ret._id;
+        },
+    }
+});
+
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -28,10 +50,9 @@ const productSchema = new mongoose.Schema({
         ref: "Unit",
         required: true
     },
-    supplierId: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Supplier"
-    }],
+    suppliers: [
+        supplierRefSchema
+    ],
     price: {
         type: Number,
         default: 0

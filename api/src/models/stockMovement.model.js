@@ -19,8 +19,6 @@ const stockMovementSchema = new mongoose.Schema({
         enum: [
             "entrada",
             "salida",
-            "reserva",
-            "liberacion",
             "ajuste"
         ],
         required: true
