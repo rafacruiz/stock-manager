@@ -7,8 +7,11 @@ import createHttpError from 'http-errors';
 
 export const authMiddleware = async (req, res, next) => {
 
-    const token = req.header('Authorization');
-    if (!header) throw createHttpError(401, 'Unauthorized. No token provided.')
+    const authHeader = req.header('Authorization');
+    if (!authHeader) throw createHttpError(401, 'Unauthorized. No token provided.');
+    
+    const token = authHeader.split(' ')[1];
+    if (!token) throw createHttpError(401, 'Invalid format token.')
 
     try {
         const decoded = jwt.verify(
