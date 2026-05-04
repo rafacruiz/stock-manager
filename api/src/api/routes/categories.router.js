@@ -15,31 +15,31 @@ import roleMiddleware  from '../middlewares/role.middleware.js';
 const categoryRouter = Router();
 
 categoryRouter.post(
-    "/",
+    "/categories",
     schemaValidator,
     roleMiddleware("admin"),
     createCategory
 );
 
 categoryRouter.get(
-    "/",
+    "/categories",
     getCategories
 );
 
 categoryRouter.get(
-    "/:id",
+    "/categories/:categoryId",
     getCategoryById
 );
 
 categoryRouter.patch(
-    "/:id",
+    "/categories/:categoryId",
     schemaValidator,
     roleMiddleware("admin"),
     updateCategory
 );
 
 categoryRouter.delete(
-    "/:id",
+    "/categories/:categoryId",
     roleMiddleware("admin"),
     deleteCategory
 );

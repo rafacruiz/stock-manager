@@ -9,7 +9,7 @@ import roleMiddleware from "../middlewares/role.middleware.js";
 const stockRouter = Router();
 
 stockRouter.post(
-    "/add",
+    "/stocks/add",
     schemaValidator,
     roleMiddleware("admin"),
     addStock
